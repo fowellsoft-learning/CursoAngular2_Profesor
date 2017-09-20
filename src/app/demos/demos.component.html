@@ -1,0 +1,53 @@
+<table>
+    <tr>
+      <td><calculadora (updated)="ponResultado('UNO', $event)"></calculadora></td>
+      <td >
+        <table border="1">
+          <tr><th>Nº</th><th>Calc</th><th>Resultado</th></tr>
+          <tr  *ngFor="let r of resultados | slice:-5">
+            <td class="text-right">{{r.pos}}</td>
+            <td>{{r.origen}}</td>
+            <td class="text-right">{{r.valor | localnumber:idioma:'1.0-8' }}</td>
+          </tr>
+        </table>
+      </td>
+      <td><calculadora [init]="fontSizePx" (updated)="ponResultado('DOS', $event)"></calculadora></td>
+    </tr>
+  </table>
+  {{resultados | json}}
+<p>
+{{mensaje | elipsis:50}}<br>
+<input type="text" [(ngModel)]="VM.Nombre"><br>
+<button (click)="saluda()">Saluda</button>
+<button (click)="despide()">Despide</button>
+<button (click)="di('algo')">Di algo</button>
+<button (click)="VM.ponMayusculas()">Pon Mayusculas</button>
+<button (click)="oculta()">{{visible ? 'Oculta' : 'Muestra'}}</button>
+</p>
+<p [hidden]="!visible">Ahora me ves</p>
+<p *ngIf="visible">Ahora existo</p>
+<p [class.esVisible]="visible">Mira el color</p>
+
+<ul>
+    <li *ngFor="let p of listado | slice:-6; let ind=index; let fondo=odd;" 
+        [style.background-color]="fondo ? 'LightBlue' : 'Lavender'">
+            {{ind + 1}} {{p.nombre | capitalize}} ({{p.id}})
+    </li>
+</ul>
+
+<p>
+    <select [(ngModel)]="idProvincia" >
+        <option value="">--Elige opción--</option>
+        <option *ngFor="let p of listado" [value]="p.id">
+            {{p.nombre | uppercase}}</option>
+    </select>
+    Seleccionado: {{idProvincia}}  
+    <button (click)="add('Málaga')">Añade Málaga</button>
+    <button (click)="add('A Coruña')">Añade A Coruña</button>
+</p>
+
+<my-sizer [(size)]="fontSizePx"></my-sizer>
+
+<p [style.font-size.px]="fontSizePx">
+    Calcula: 2 + 2 = {{2 + 2}} = {{calcula(2, 2) | currency:'EUR':false:'4.2-2' | lowercase }}
+</p>
