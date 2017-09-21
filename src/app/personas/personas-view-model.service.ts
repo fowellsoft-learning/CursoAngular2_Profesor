@@ -60,7 +60,7 @@ export class PersonasViewModelService {
   delete(id: number) {
     if (!window.confirm('¿Seguro?')) { return; }
     let ind = this.listado.findIndex(ele => ele[this.PK] == id);
-    if (ind) {
+    if (ind > -1) {
       this.listado.splice(ind, 1);
       this.list();
     } else {
@@ -82,7 +82,7 @@ export class PersonasViewModelService {
         break;
       case 'edit':
         const ind = this.listado.findIndex(ele => ele[this.PK] == this.idOriginal);
-        if (ind) {
+        if (ind > -1) {
           this.listado[ind] = this.elemento;
           this.cancel();
         } else {
