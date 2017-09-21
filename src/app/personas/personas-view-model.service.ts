@@ -13,15 +13,15 @@ export class PersonasViewModelService {
 
   get Listado() { return this.listado; }
   get Elemento() { return this.elemento; }
-  get Modo () { return this.modo; }
+  get Modo() { return this.modo; }
 
   private load() {
     if (this.listado.length === 0) {
       this.listado = [
-        {id: 1, nombre: 'Carmelo', apellidos: 'Coton', edad: 34},
-        {id: 2, nombre: 'Pepito', apellidos: 'Grillo', edad: 105},
-        {id: 3, nombre: 'Pedro', apellidos: 'Pica Piedra', edad: 55},
-        {id: 4, nombre: 'Capitan', apellidos: 'Tan', edad: 18},
+        { id: 1, nombre: 'Carmelo', apellidos: 'Coton', edad: 34 },
+        { id: 2, nombre: 'Pepito', apellidos: 'Grillo', edad: 105 },
+        { id: 3, nombre: 'Pedro', apellidos: 'Pica Piedra', edad: 55 },
+        { id: 4, nombre: 'Capitan', apellidos: 'Tan', edad: 18 },
       ];
     }
   }
@@ -75,6 +75,23 @@ export class PersonasViewModelService {
   }
 
   send() {
-
+    switch (this.modo) {
+      case 'add':
+        this.listado.push(this.elemento);
+        this.cancel();
+        break;
+      case 'edit':
+        const ind = this.listado.findIndex(ele => ele[this.PK] == this.idOriginal);
+        if (ind) {
+          this.listado[ind] = this.elemento;
+          this.cancel();
+        } else {
+          this.log.error('Elemento no encontrado.');
+        }
+        break;
+      case 'view':
+        this.cancel();
+        break;
+    }
   }
 }

@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { DemosComponent } from './demos/demos.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { SizerComponent } from './sizer/sizer.component';
-import { PersonasComponent } from './personas/personas.component';
+import { PERSONAS_COMPONENT } from './personas/personas.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +20,13 @@ import { PersonasComponent } from './personas/personas.component';
     DemosComponent,
     CalculadoraComponent,
     SizerComponent,
-    PersonasComponent,
+    PERSONAS_COMPONENT,
    ],
   imports: [
     BrowserModule, FormsModule, MyCoreModule,
   ],
-  providers: [ LoggerService, MisDatosService, PersonasViewModelService ],
+  providers: [ LoggerService, MisDatosService, 
+    PersonasViewModelService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
