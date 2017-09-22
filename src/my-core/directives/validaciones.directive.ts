@@ -1,7 +1,5 @@
-// import { Directive, OnChanges, Input, SimpleChanges, forwardRef } from '@angular/core';
-// import { Validator, AbstractControl, NG_VALIDATORS, ValidatorFn, ValidationErrors, Validators } from '@angular/forms';
-import { Directive, OnChanges, Input } from '@angular/core';
-import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
+import { Directive, OnChanges, Input, SimpleChanges, forwardRef } from '@angular/core';
+import { Validator, AbstractControl, NG_VALIDATORS, ValidatorFn, ValidationErrors, Validators } from '@angular/forms';
 
 @Directive({
   selector: '[upperCase]',
@@ -17,7 +15,7 @@ export class UpperCaseValidatorDirective implements Validator {
     }
   }
 }
-/*
+
 export const MIN_LENGTH_VALIDATOR: any = {
   provide: NG_VALIDATORS,
   useExisting: forwardRef(() => MinValidatorDirective),
@@ -53,5 +51,5 @@ export class MinValidatorDirective implements Validator,
     this._validator = Validators.min(parseInt(this.min, 10));
   }
 }
-*/
-export const VALIDACIONES_PERSONALIZADA = [UpperCaseValidatorDirective];
+
+export const VALIDACIONES_PERSONALIZADA = [UpperCaseValidatorDirective, MinValidatorDirective];

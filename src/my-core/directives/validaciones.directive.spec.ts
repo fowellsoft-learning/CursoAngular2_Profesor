@@ -1,8 +1,8 @@
-import { ValidacionesDirective } from './validaciones.directive';
+import { UpperCaseValidatorDirective } from './validaciones.directive';
 
 describe('ValidacionesDirective', () => {
   it('should create an instance', () => {
-    const directive = new ValidacionesDirective();
+    const directive = new UpperCaseValidatorDirective();
     expect(directive).toBeTruthy();
   });
 });
