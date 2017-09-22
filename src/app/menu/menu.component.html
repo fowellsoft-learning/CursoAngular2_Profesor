@@ -1,3 +1,11 @@
-<p>
-  <a *ngFor="let m of menu" [routerLink]="[m.href]">{{m.texto}} </a>
-</p>
+<table>
+    <td><img src="assets/logo.jpg" width="100" height="100"></td>
+    <td>
+      <ng-container *ngFor="let m of menu">
+        <a [routerLink]="m.href" routerLinkActive="error" [routerLinkActiveOptions]="{exact: true}">
+          {{m.texto}} </a></ng-container>
+    </td>
+    <td>
+      <button (winConfirm)="login('admin', 'P@$$w0rd')" winConfirmMessage="¿Estás seguro?">{{btnLogin}}</button>
+    </td>
+  </table>

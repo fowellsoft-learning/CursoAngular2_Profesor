@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
-import { LoggerService } from './../../my-core/index';
+import { LoggerService } from '../../my-core/index';
 
 @Injectable()
 export class AuthService {

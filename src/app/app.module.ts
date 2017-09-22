@@ -1,10 +1,11 @@
+import { LoginService, AuthService } from './services/interceptores.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MyCoreModule, LoggerService } from '../my-core/index';
-import { routes } from './app.rutes';
+import { routes, AuthGuard } from './app.rutes';
 
 import { MisDatosService } from './services/mis-datos.service';
 import { PersonasViewModelService, PersonasViewModelDAOService } from './personas/personas-view-model.service';
@@ -38,7 +39,7 @@ import { NotificationComponent } from './notification/notification.component';
   ],
   providers: [ LoggerService, MisDatosService,
     {provide: PersonasViewModelService, useClass: PersonasViewModelDAOService},
-    PersonasDAOService ],
+    PersonasDAOService, LoginService, AuthService, AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
