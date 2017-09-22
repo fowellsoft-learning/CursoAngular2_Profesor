@@ -1,6 +1,7 @@
 import { PersonasDAOService } from './personas-dao.service';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../my-core/index';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class PersonasViewModelDAOService {
@@ -10,7 +11,8 @@ export class PersonasViewModelDAOService {
   private idOriginal: number = null;
   private PK = 'id';
 
-  constructor(private log: LoggerService, private dao: PersonasDAOService) { }
+  constructor(private log: LoggerService, private dao: PersonasDAOService,
+    private router: Router) { }
 
   get Listado() { return this.listado; }
   get Elemento() { return this.elemento; }
@@ -65,7 +67,8 @@ export class PersonasViewModelDAOService {
   cancel() {
     this.elemento = {};
     this.idOriginal = null;
-    this.list();
+    // this.list();
+    this.router.navigate(['/personas']);
   }
 
   send() {

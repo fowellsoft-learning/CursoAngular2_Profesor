@@ -1,0 +1,20 @@
+<table>
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            <button routerLink="/personas/add">Añadir</button>
+        </th>
+    </tr>
+    <tr *ngFor="let p of VM.Listado">
+        <td>
+            <a routerLink="/personas/{{p.id}}/{{p.nombre}}_{{p.apellidos}}">
+            {{p.nombre}} {{p.apellidos}}</a>
+        </td>
+        <td>
+            <button routerLink="/personas/{{p.id}}/edit">Editar</button>
+            <button (click)="VM.delete(p.id)">Borrar</button>
+        </td>
+    </tr>
+</table>

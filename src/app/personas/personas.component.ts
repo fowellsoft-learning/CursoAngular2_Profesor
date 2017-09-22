@@ -1,6 +1,7 @@
 import { LoggerService } from './../../my-core/services/logger.service';
 import { PersonasViewModelService } from './personas-view-model.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-personas',
@@ -22,7 +23,7 @@ export class PersonasComponent implements OnInit {
 
 @Component({
   selector: 'app-personas-list',
-  templateUrl: './template-list.component.html',
+  templateUrl: './template-list.rutas.component.html',
 })
 export class PersonasListComponent implements OnInit {
 
@@ -32,6 +33,7 @@ export class PersonasListComponent implements OnInit {
   public get VM() { return this.vm; }
 
   ngOnInit() {
+    this.VM.list();
   }
 
 }
@@ -48,6 +50,7 @@ export class PersonasAddComponent implements OnInit {
   public get VM() { return this.vm; }
 
   ngOnInit() {
+    this.vm.add();
   }
 
 }
@@ -56,31 +59,65 @@ export class PersonasAddComponent implements OnInit {
   selector: 'app-personas-edit',
   templateUrl: './template-form.component.html',
 })
-export class PersonasEditComponent implements OnInit {
+export class PersonasEditComponent implements OnInit, OnDestroy {
+  private obs: any;
 
   constructor(private vm: PersonasViewModelService,
-    private log: LoggerService) { }
+    private log: LoggerService, private route: ActivatedRoute,
+    private router: Router) { }
 
   public get VM() { return this.vm; }
 
   ngOnInit() {
+    this.obs = this.route.params.subscribe(params => {
+      const id = +params['id']; // (+) converts string 'id' to a number
+      if (id) {
+        this.vm.edit(id);
+      } else {
+        this.router.navigate(['/error']);
+      }
+    });
   }
-
+  ngOnDestroy() {
+    this.obs.unsubscribe();
+  }
 }
 
 @Component({
   selector: 'app-personas-view',
   templateUrl: './template-view.component.html',
 })
-export class PersonasViewComponent implements OnInit {
+export class PersonasViewComponent implements OnInit, OnDestroy {
+  private obs: any;
 
   constructor(private vm: PersonasViewModelService,
-    private log: LoggerService) { }
+    private log: LoggerService, private route: ActivatedRoute,
+    private router: Router) { }
 
   public get VM() { return this.vm; }
 
   ngOnInit() {
+    /*
+    let id = this.route.snapshot.params['id'];
+    if (id) {
+      this.vm.view(+id);
+    } else {
+      this.router.navigate(['/error']);
+    }
+    */
+    this.obs = this.route.params.subscribe(params => {
+      const id = +params['id']; // (+) converts string 'id' to a number
+      if (id) {
+        this.vm.edit(id);
+      } else {
+        this.router.navigate(['/error']);
+      }
+    });
   }
+  ngOnDestroy() {
+    this.obs.unsubscribe();
+  }
+
 
 }
 
